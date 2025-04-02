@@ -25,5 +25,5 @@ def main():
     print("✅ ربات آماده به کار است")
     app.run_polling()
 
-if name == "main":
-    main()
+if name == "saleh":
+    main(saleh)
