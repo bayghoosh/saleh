@@ -1,31 +1,28 @@
+# -*- coding: utf-8 -*-
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = "7645753318:AAFdnqvhJu-AhgRu0oAEYpSwv0N9UfwwfKE"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """ÇÑÓÇá íÇã ÎæÔÂãÏæíí åäÇã ÏÑíÇİÊ ÏÓÊæÑ /start"""
     user = update.effective_user
-    await update.message.reply_text(f"ÓáÇã {user.first_name}!\nÈå ÑÈÇÊ ãÇ ÎæÔ ÂãÏíÏ! ??")
-
-async def handle_new_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """ÎæÔÂãÏæíí Èå ÇÚÖÇí ÌÏíÏ"""
+    await update.message.reply_text(f"Ø³Ù„Ø§Ù… {user.first_name} Ø¹Ø²ÛŒØ²! Ø¨Ù‡ Ø±Ø¨Ø§Øª Ù…Ø§ Ø®ÙˆØ´ Ø¢Ù…Ø¯ÛŒØ¯!")
+    
+async def welcome_new_members(update: Update, context: ContextTypes.DEFAULT_TYPE):
     for member in update.message.new_chat_members:
         await update.message.reply_text(
-            f"ÓáÇã {member.first_name}!\n"
-            "Èå ÌãÚ ãÇ ÎæÔ ÂãÏí! ??\n"
-            "ÈÑÇí ÔÑæÚ ÇÒ ÏÓÊæÑ /start ÇÓÊİÇÏå ˜ä."
+            f"Ø³Ù„Ø§Ù… {member.first_name}!\n"
+            "Ø¨Ù‡ Ø¬Ù…Ø¹ Ù…Ø§ Ø®ÙˆØ´ Ø¢Ù…Ø¯ÛŒ Ø¯ÙˆØ³Øª Ø¹Ø²ÛŒØ²!"
         )
 
 def main():
-    """ÊäÙíã æ ÑÇåÇäÏÇÒí ÑÈÇÊ"""
+    print("Ø¯Ø± Ø­Ø§Ù„ Ø±Ø§Ù‡ Ø§Ù†Ø¯Ø§Ø²ÛŒ Ø±Ø¨Ø§Øª...")
     app = Application.builder().token(BOT_TOKEN).build()
     
-    # ËÈÊ åäÏáÑåÇ
     app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, handle_new_members))
+    app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome_new_members))
     
-    print("? ÑÈÇÊ İÑæÔ ÏÑ ÍÇá ÇÌÑÇÓÊ...")
+    print("âœ… Ø±Ø¨Ø§Øª Ø¢Ù…Ø§Ø¯Ù‡ Ø¨Ù‡ Ú©Ø§Ø± Ø§Ø³Øª")
     app.run_polling()
 
 if name == "main":
